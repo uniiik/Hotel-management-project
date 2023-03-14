@@ -33,6 +33,17 @@ const ViewBookingPage = () => {
     return <div>Loading...</div>;
   }
 
+  const formatDate = (date) => {
+    const d = new Date(date);
+    const year = d.getFullYear();
+    const month = ("0" + (d.getMonth() + 1)).slice(-2);
+    const day = ("0" + d.getDate()).slice(-2);
+    const hours = ("0" + d.getHours()).slice(-2);
+    const minutes = ("0" + d.getMinutes()).slice(-2);
+    const seconds = ("0" + d.getSeconds()).slice(-2);
+    return `${day}-${month}-${year} ${hours}:${minutes}:${seconds}`;
+  };
+
   return (
     <div>
       <h1>View Booking</h1>
@@ -58,10 +69,10 @@ const ViewBookingPage = () => {
               </td>
               <td style={{ border: "1px solid black" }}>{booking.roomType}</td>
               <td style={{ border: "1px solid black" }}>
-                {booking.start.toLocaleString()}
+                {formatDate(booking.start)}
               </td>
               <td style={{ border: "1px solid black" }}>
-                {booking.end.toLocaleString()}
+                {formatDate(booking.end)}
               </td>
               <td style={{ border: "1px solid black" }}>{booking.price}</td>
               <a href={`/bookings/edit/${index}`}>
@@ -71,6 +82,13 @@ const ViewBookingPage = () => {
                   className="px-4"
                 >
                   EDIT
+                </button>
+                <button
+                  style={{ marginRight: "10px" }}
+                  color="primary"
+                  className="px-4"
+                >
+                  DELETE
                 </button>
               </a>
             </tr>
