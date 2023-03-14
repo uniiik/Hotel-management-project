@@ -41,14 +41,6 @@ const HomePage = () => {
       >
         Create page
       </button>
-      <button
-        style={{ marginRight: "10px" }}
-        color="primary"
-        className="px-4"
-        onClick={drouteChange}
-      >
-        Delete page
-      </button>
     </div>
   );
 };
