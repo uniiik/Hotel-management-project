@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 
 import { useNavigate } from "react-router-dom"; /* */
 
 import { useParams } from "react-router-dom";
+import { deleteBooking, getBookingById } from "../util/db";
 
 const DeleteBookingPage = () => {
   const [booking, setBooking] = useState(null);
@@ -16,8 +16,8 @@ const DeleteBookingPage = () => {
 
   const fetchBooking = async () => {
     try {
-      const response = await axios.get(`/api/bookings/${id}`);
-      setBooking(response.data);
+      const data = getBookingById(id);
+      setBooking(data);
     } catch (error) {
       console.error(error);
     }
@@ -25,45 +25,61 @@ const DeleteBookingPage = () => {
 
   const handleDelete = async () => {
     try {
-      const response = await axios.delete(`/api/bookings/${id}`);
-      console.log(response);
-      history.push("/bookings");
+      deleteBooking(id);
+      history("/bookings");
     } catch (error) {
       console.error(error);
     }
   };
 
   const handleCancel = () => {
-    history.goBack();
+    history(-1);
   };
 
   if (!booking) {
     return <div>Loading...</div>;
   }
 
-  const refundAmount =
-    booking.status === "CANCELLED"
-      ? "0"
-      : booking.start.getTime() - Date.now() > 48 * 60 * 60 * 1000
-      ? booking.price
-      : booking.start.getTime() - Date.now() > 24 * 60 * 60 * 1000
-      ? Math.floor(booking.price / 2)
-      : 0;
+  const canDeleteBooking = new Date(booking.start) > Date.now();
+  console.log(canDeleteBooking);
+
+  const refundAmount = (() => {
+    if (new Date(booking.start) - Date.now() > 48 * 60 * 60 * 1000) {
+      return 1;
+    } else if (new Date(booking.start) - Date.now() > 24 * 60 * 60 * 1000) {
+      return 0.5;
+    } else {
+      return 0;
+    }
+  })();
+  console.log(refundAmount);
 
   return (
     <div>
       <h1>Delete Booking</h1>
       <p>Are you sure you want to delete this booking?</p>
-      <p>Booking ID: {booking.id}</p>
+      <p>Booking ID: {id}</p>
       <p>Email: {booking.email}</p>
       <p>Room Number: {booking.roomNumber}</p>
       <p>Room Type: {booking.roomType}</p>
       <p>Start Time: {booking.start.toLocaleString()}</p>
       <p>End Time: {booking.end.toLocaleString()}</p>
       <p>Price: {booking.price}</p>
-      <p>Refund Amount: {refundAmount}</p>
-      <button onClick={handleDelete}>Delete</button>
+      <p>
+        Refund Amount: {refundAmount * 100}% = {booking.price * refundAmount}
+      </p>
+      <button onClick={handleDelete} disabled={!canDeleteBooking}>
+        Delete
+      </button>
       <button onClick={handleCancel}>Cancel</button>
+      {canDeleteBooking ? null : (
+        <p>
+          {" "}
+          <b>
+            Cannot delete this booking since start time has already passed{" "}
+          </b>{" "}
+        </p>
+      )}
     </div>
   );
 };

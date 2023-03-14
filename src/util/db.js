@@ -19,3 +19,7 @@ export function updateBooking(id, diff) {
   db.save();
   console.log("updated", getBookingById(id));
 }
+
+export function deleteBooking(id) {
+  db.del(parseInt(id));
+}
