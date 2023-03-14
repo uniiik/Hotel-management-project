@@ -10,6 +10,10 @@ const View = () => {
   useEffect(() => {
     fetchBooking();
   }, []);
+  /*
+  Uses the useEffect hook to fetch the booking details when the component is mounted.
+  The fetchBooking function is called when the component is mounted because an empty dependency array ([]) is passed as the second argument to useEffect.
+  */
 
   const fetchBooking = async () => {
     try {
