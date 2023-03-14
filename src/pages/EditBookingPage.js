@@ -5,6 +5,8 @@ import { useParams } from "react-router-dom"; /* */
 import { useNavigate } from "react-router-dom"; /* */
 // import { useNavigate } from "history"; /* */
 
+import { getBookingById, updateBooking } from "../util/db";
+import { getPrice } from "../util/util";
 
 const EditBookingPage = () => {
   const [booking, setBooking] = useState(null);
@@ -27,9 +29,10 @@ const EditBookingPage = () => {
 
   const fetchBooking = async () => {
     try {
-      const response = await axios.get(`/api/bookings/${id}`);
-      setBooking(response.data);
-      setFormData(response.data);
+      const data = getBookingById(id);
+      console.log(data);
+      setBooking(data);
+      setFormData(data);
     } catch (error) {
       console.error(error);
     }
@@ -40,14 +43,24 @@ const EditBookingPage = () => {
       ...formData,
       [event.target.name]: event.target.value,
     });
+    const { name, value } = event.target;
+    if (name == "roomType" || name == "start" || name == "end") {
+      setFormData((prevState) => ({
+        ...prevState,
+        ["price"]: getPrice(
+          name == "roomType" ? value : formData.roomType,
+          formData.start,
+          formData.end
+        ),
+      }));
+    }
   };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const response = await axios.put(`/api/bookings/${id}`, formData);
-      console.log(response);
-      history.push(`/bookings/${id}`);
+      updateBooking(id, formData);
+      history(`/bookings`);
     } catch (error) {
       console.error(error);
     }

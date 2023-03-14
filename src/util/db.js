@@ -10,5 +10,12 @@ export function getAllBooking() {
 }
 
 export function getBookingById(id) {
-  return db.get(id);
+  return db.get(parseInt(id));
+}
+
+export function updateBooking(id, diff) {
+  console.log("received:", diff);
+  db.mainDb[parseInt(id)] = diff;
+  db.save();
+  console.log("updated", getBookingById(id));
 }
