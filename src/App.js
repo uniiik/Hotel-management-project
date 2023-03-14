@@ -1,6 +1,5 @@
 import React from "react";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import HomePage from "./pages/HomePage";
 
 import BookRoomPage from "./pages/BookRoomPage";
@@ -11,7 +10,7 @@ import DeleteBookingPage from "./pages/DeleteBookingPage";
 function App() {
   return (
     <Router>
-      <Switch>
+      <Routes>
         <Route exact path="/">
           <HomePage />
         </Route>
@@ -27,7 +26,7 @@ function App() {
         <Route exact path="/bookings/delete/:id">
           <DeleteBookingPage />
         </Route>
-      </Switch>
+      </Routes>
     </Router>
   );
 }
