@@ -83,6 +83,8 @@ const ViewBookingPage = () => {
                 >
                   EDIT
                 </button>
+              </a>
+              <a href={`/bookings/delete/${index}`}>
                 <button
                   style={{ marginRight: "10px" }}
                   color="primary"
