@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from "react";
-import { useHistory, useParams } from "react-router-dom";
+/*import { useNavigate, useParams } from "react-router-dom";*/
 import axios from "axios";
+import { useNavigate } from "react-router-dom"; /* */
+
+import { useParams } from "react-router-dom"; /* */
 
 const DeleteBookingPage = () => {
   const [booking, setBooking] = useState(null);
   const { id } = useParams();
-  const history = useHistory();
+  const history = useNavigate();
 
   useEffect(() => {
     fetchBooking();

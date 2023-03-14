@@ -1,6 +1,8 @@
 import React, { useState } from "react";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
+
+import { useParams } from "react-router-dom"; /* */
 
 const BookRoomPage = () => {
   const [booking, setBooking] = useState({
@@ -12,7 +14,7 @@ const BookRoomPage = () => {
     price: 0,
   });
 
-  const history = useHistory();
+  const history = useNavigate();
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
