@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+/*import { useParams } from "react-router-dom";*/
 import { getAllBooking } from "../util/db";
 import { useNavigate } from "react-router-dom";
 
@@ -42,16 +42,16 @@ const ViewBookingPage = () => {
           <p>End Time: {booking.end.toLocaleString()}</p>
           <p>Price: {booking.price}</p>
           <p>Status: {booking.status}</p>
-          <button
-            style={{ marginRight: "10px" }}
-            color="primary"
-            className="px-4"
-            onClick={nikhil}
-          >
-            BACK
-          </button>
         </div>
       ))}
+      <button
+        style={{ marginRight: "10px" }}
+        color="primary"
+        className="px-4"
+        onClick={nikhil}
+      >
+        BACK
+      </button>
     </div>
   );
 };
