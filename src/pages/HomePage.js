@@ -11,14 +11,7 @@ const HomePage = () => {
     let path = `/bookings/create`;
     navigate(path);
   };
-  const drouteChange = () => {
-    let path = `/bookings/delete/:id`;
-    navigate(path);
-  };
-  const vrouteChange = () => {
-    let path = `/bookings/edit/:id`;
-    navigate(path);
-  };
+
   return (
     <div>
       <h1>HOTEL SCALER</h1>
