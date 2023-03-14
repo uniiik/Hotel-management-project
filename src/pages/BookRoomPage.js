@@ -3,9 +3,11 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 import { useParams } from "react-router-dom"; /* */
+import { getPrice } from "../util/util";
+import { createBooking } from "../util/db";
 
 const BookRoomPage = () => {
-  let navigate = useNavigate();
+  const navigate = useNavigate();
   const nikhil = () => {
     let path = `/`;
     navigate(path);
@@ -19,19 +21,28 @@ const BookRoomPage = () => {
     price: 0,
   });
 
-  const history = useNavigate();
-
   const handleInputChange = (event) => {
     const { name, value } = event.target;
     setBooking((prevState) => ({ ...prevState, [name]: value }));
+    if (name == "roomType" || name == "start" || name == "end") {
+      setBooking((prevState) => ({
+        ...prevState,
+        ["price"]: getPrice(
+          name == "roomType" ? value : booking.roomType,
+          booking.start,
+          booking.end
+        ),
+      }));
+    }
   };
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
     try {
-      const response = await axios.post("/api/bookings", booking);
-      console.log(response);
-      history.push("/bookings");
+      // const response = await axios.post("/api/bookings", booking);
+      // console.log(response);
+      createBooking(booking);
+      navigate("/bookings");
     } catch (error) {
       console.error(error);
     }
