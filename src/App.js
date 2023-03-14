@@ -11,21 +11,22 @@ function App() {
   return (
     <Router>
       <Routes>
-        <Route exact path="/">
-          <HomePage />
-        </Route>
-        <Route exact path="/bookings">
-          <ViewBookingPage />
-        </Route>
-        <Route exact path="/bookings/create">
-          <BookRoomPage />
-        </Route>
-        <Route exact path="/bookings/edit/:id">
-          <EditBookingPage />
-        </Route>
-        <Route exact path="/bookings/delete/:id">
-          <DeleteBookingPage />
-        </Route>
+        <Route path="/" element={<HomePage />} />
+
+        <Route path="/bookings" element={<ViewBookingPage />} />
+        <Route path="/bookings/create" element={<BookRoomPage />} />
+        {/* <BookRoomPage /> */}
+        {/* </Route> */}
+        <Route exact path="/bookings/edit/:id" element={<EditBookingPage />} />
+        {/* <EditBookingPage />
+        </Route> */}
+        <Route
+          exact
+          path="/bookings/delete/:id"
+          element={<DeleteBookingPage />}
+        />
+        {/* <DeleteBookingPage />
+        </Route> */}
       </Routes>
     </Router>
   );

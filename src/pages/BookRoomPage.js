@@ -5,6 +5,11 @@ import axios from "axios";
 import { useParams } from "react-router-dom"; /* */
 
 const BookRoomPage = () => {
+  let navigate = useNavigate();
+  const nikhil = () => {
+    let path = `/`;
+    navigate(path);
+  };
   const [booking, setBooking] = useState({
     email: "",
     roomNumber: "",
@@ -68,10 +73,9 @@ const BookRoomPage = () => {
             required
           >
             <option value="">Select a room type</option>
-            <option value="single">Single</option>
-            <option value="double">Double</option>
-            <option value="twin">Twin</option>
-            <option value="suite">Suite</option>
+            <option value="A">A</option>
+            <option value="B">B</option>
+            <option value="C">C</option>
           </select>
         </div>
         <div>
@@ -107,7 +111,22 @@ const BookRoomPage = () => {
             required
           />
         </div>
-        <button type="submit">Book</button>
+        <button
+          type="submit"
+          style={{ marginRight: "10px" }}
+          color="primary"
+          className="px-4"
+        >
+          Book
+        </button>
+        <button
+          style={{ marginRight: "10px" }}
+          color="primary"
+          className="px-4"
+          onClick={nikhil}
+        >
+          BACK
+        </button>
       </form>
     </div>
   );
