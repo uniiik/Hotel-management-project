@@ -49,9 +49,6 @@ const HomePage = () => {
       >
         Delete page
       </button>
-      <button color="primary" className="px-4" onClick={vrouteChange}>
-        Edit page
-      </button>
     </div>
   );
 };

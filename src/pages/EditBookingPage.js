@@ -138,14 +138,7 @@ const EditBookingPage = () => {
           />
         </label>
         <br />
-        <label>
-          Status:
-          <select name="status" value={formData.status} onChange={handleChange}>
-            <option value="PENDING">Pending</option>
-            <option value="CONFIRMED">Confirmed</option>
-            <option value="CANCELLED">Cancelled</option>
-          </select>
-        </label>
+
         <br />
         <button type="submit">Save</button>
         <button type="button" onClick={handleCancel}>

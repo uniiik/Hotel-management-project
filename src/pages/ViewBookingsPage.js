@@ -9,6 +9,10 @@ const ViewBookingPage = () => {
     let path = `/`;
     navigate(path);
   };
+  const nikhiledit = () => {
+    let path = `/bookings/edit/:id`;
+    navigate(path);
+  };
   const [booking, setBooking] = useState(null);
 
   useEffect(() => {
@@ -32,18 +36,47 @@ const ViewBookingPage = () => {
   return (
     <div>
       <h1>View Booking</h1>
-      {booking.map((booking, index) => (
-        <div>
-          <p>Booking ID: {index}</p>
-          <p>Email: {booking.email}</p>
-          <p>Room Number: {booking.roomNumber}</p>
-          <p>Room Type: {booking.roomType}</p>
-          <p>Start Time: {booking.start.toLocaleString()}</p>
-          <p>End Time: {booking.end.toLocaleString()}</p>
-          <p>Price: {booking.price}</p>
-          <p>Status: {booking.status}</p>
-        </div>
-      ))}
+      <table style={{ border: "1px solid black", borderCollapse: "collapse" }}>
+        <thead>
+          <tr>
+            <th style={{ border: "1px solid black" }}>ID</th>
+            <th style={{ border: "1px solid black" }}>Email</th>
+            <th style={{ border: "1px solid black" }}>Room Number</th>
+            <th style={{ border: "1px solid black" }}>Room Type</th>
+            <th style={{ border: "1px solid black" }}>Start Time</th>
+            <th style={{ border: "1px solid black" }}>End Time</th>
+            <th style={{ border: "1px solid black" }}>Price</th>
+          </tr>
+        </thead>
+        <tbody>
+          {booking.map((booking, index) => (
+            <tr key={index}>
+              <td style={{ border: "1px solid black" }}>{index}</td>
+              <td style={{ border: "1px solid black" }}>{booking.email}</td>
+              <td style={{ border: "1px solid black" }}>
+                {booking.roomNumber}
+              </td>
+              <td style={{ border: "1px solid black" }}>{booking.roomType}</td>
+              <td style={{ border: "1px solid black" }}>
+                {booking.start.toLocaleString()}
+              </td>
+              <td style={{ border: "1px solid black" }}>
+                {booking.end.toLocaleString()}
+              </td>
+              <td style={{ border: "1px solid black" }}>{booking.price}</td>
+              <a href={`/bookings/edit/${index}`}>
+                <button
+                  style={{ marginRight: "10px" }}
+                  color="primary"
+                  className="px-4"
+                >
+                  EDIT
+                </button>
+              </a>
+            </tr>
+          ))}
+        </tbody>
+      </table>
       <button
         style={{ marginRight: "10px" }}
         color="primary"
