@@ -21,11 +21,8 @@ const HomePage = () => {
   };
   return (
     <div>
-      <h1>Welcome to Our Hotel Booking System</h1>
-      <p>
-        Book a room in our hotel today and experience the best in comfort and
-        luxury!
-      </p>
+      <h1>HOTEL SCALER</h1>
+      <p>Welcome to Hotel Admin Booking Page</p>
 
       <button
         style={{ marginRight: "10px" }}
@@ -33,7 +30,7 @@ const HomePage = () => {
         className="px-4"
         onClick={routeChange}
       >
-        Booking page
+        VIEW page
       </button>
 
       <button

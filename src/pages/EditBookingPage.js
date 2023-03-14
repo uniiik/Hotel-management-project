@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom"; /* */
 
 import { useNavigate } from "react-router-dom"; /* */
 // import { useNavigate } from "history"; /* */
-import axios from "axios";
+
 
 const EditBookingPage = () => {
   const [booking, setBooking] = useState(null);
